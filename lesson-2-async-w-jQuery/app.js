@@ -11,12 +11,16 @@
         e.preventDefault();
         responseContainer.innerHTML = '';
         searchedForText = searchField.value;
-		$.ajax({
-			url: `https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`,
-			headers: {
-				Authorization: 'Client-ID lQOJO5Jpn5zPIwURtogMiMp9dQwd8GF5fvgz6Dbpc-Y'
-			}
-		}).done(addImage);
+	$.ajax({
+		url: `https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`,
+		headers: {
+			Authorization: 'Client-ID lQOJO5Jpn5zPIwURtogMiMp9dQwd8GF5fvgz6Dbpc-Y'
+		}
+	}).done(addImage);
+
+	$.ajax({
+		url: `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`,
+	}).done(addArticles);
     });
 	
 	function addImage(images){
@@ -29,9 +33,8 @@
 		responseContainer.insertAdjacentHTML('afterbegin', htmlContent);
 	}
 
-	function addArticles () {
+	function addArticles (data) {
 		let htmlContent = '';
-		const data = JSON.parse(this.responseText);
 		if(data.response && data.response.docs && data.response.docs.length > 1){
 			htmlContent = '<ul>'+ data.response.docs.map(
 				article => `<li class="article">
