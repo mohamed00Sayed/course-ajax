@@ -9,19 +9,21 @@
         e.preventDefault();
         responseContainer.innerHTML = '';
         searchedForText = searchField.value;
+	//send first request
+	unsplashRequest.send();
+	//send second requst
+	articleRequest.send();
+    });
+	
 	//first request to Unsplash
 	const unsplashRequest = new XMLHttpRequest();
 	unsplashRequest.open('GET', `https://api.unsplash.com/search/photos?page=1&query=${searchedForText}`);
 	unsplashRequest.onload = addImage;
 	unsplashRequest.setRequestHeader('Authorization', 'Client-ID lQOJO5Jpn5zPIwURtogMiMp9dQwd8GF5fvgz6Dbpc-Y');
-	unsplashRequest.send();
-
 	//second request to NYTimes
 	const articleRequest = new XMLHttpRequest();
 	articleRequest.onload = addArticles;
 	articleRequest.open('GET', `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`);
-	articleRequest.send();
-    });
 	
 	function addImage(){
 		const data = JSON.parse(this.responseText);
