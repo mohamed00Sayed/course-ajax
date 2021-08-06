@@ -17,9 +17,22 @@
 	unsplashRequest.onload = addImage;
 	unsplashRequest.setRequestHeader('Authorization', 'Client-ID lQOJO5Jpn5zPIwURtogMiMp9dQwd8GF5fvgz6Dbpc-Y');
 	unsplashRequest.send();
-
+	
 	function addImage(){
-		
+		const data = JSON.parse(this.responseText);
+		const firstImage = data.results[0];
+		let htmlContent = `<figure>
+			<img src="${firstImage.urls.regular}" alt="${searchedForText}">
+			<figcaption>${searchedForText} by ${firstImage.user.name}</figcaption>
+		</figure>`;
+		responseContainer.insertAdjacentHTML('afterbegin', htmlContent);
 	}
 	
+	function addArticles () {
+		let htmlContent = '';
+	}
+	const articleRequest = new XMLHttpRequest();
+	articleRequest.onload = addArticles;
+	articleRequest.open('GET', `http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`);
+	articleRequest.send();
 })();
