@@ -22,7 +22,7 @@
 		fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`)
 		.then(response => response.json())
 		.then(addArticles)
-		.catch(e => requestError(e, 'image'));
+		.catch(e => requestError(e, 'articles'));
     });
 	
 	function addImage(data){
