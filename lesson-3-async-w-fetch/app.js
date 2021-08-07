@@ -14,14 +14,12 @@
 			headers: {
 				Authorization: 'Client-ID lQOJO5Jpn5zPIwURtogMiMp9dQwd8GF5fvgz6Dbpc-Y'
 			}
-		}).then(function(response) {
-			return response.json();
-		}).then(addImage);
+		}).then(response => response.json()
+		).then(addImage);
 		
 		fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`
-		).then(function(response) {
-			return response.json();
-		}).then(addArticles);
+		).then(response => response.json()
+		).then(addArticles);
     });
 	
 	function addImage(data){
