@@ -14,12 +14,15 @@
 			headers: {
 				Authorization: 'Client-ID lQOJO5Jpn5zPIwURtogMiMp9dQwd8GF5fvgz6Dbpc-Y'
 			}
-		}).then(response => response.json()
-		).then(addImage);
+		})
+		.then(response => response.json())
+		.then(addImage)
+		.catch(e => requestError(e, 'image'));
 		
-		fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`
-		).then(response => response.json()
-		).then(addArticles);
+		fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`)
+		.then(response => response.json())
+		.then(addArticles)
+		.catch(e => requestError(e, 'image'));
     });
 	
 	function addImage(data){
@@ -53,4 +56,8 @@
 		responseContainer.insertAdjacentHTML('beforeend', htmlContent);
 	}
 	
+	function requestError(e, part) {
+		console.log(e);
+		responseContainer.insertAdjacentHTML('beforeend', `<p class="network-warning">Oh no! There was an error making a request for the ${part}.</p>`);
+	}
 })();
