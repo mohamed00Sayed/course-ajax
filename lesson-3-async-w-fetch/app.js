@@ -3,7 +3,6 @@
     const searchField = document.querySelector('#search-keyword');
     let searchedForText;
     const responseContainer = document.querySelector('#response-container');
-	const searchButton = document.querySelector('#submit-btn');
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
