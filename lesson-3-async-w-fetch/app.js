@@ -17,6 +17,11 @@
 		}).then(function(response) {
 			return response.json();
 		}).then(addImage);
+		
+		fetch(`http://api.nytimes.com/svc/search/v2/articlesearch.json?q=${searchedForText}&api-key=FyhFXnLTxSJtRiOAvFlGjH7g67ahUSad`
+		).then(function(response) {
+			return response.json();
+		}).then(addArticles);
     });
 	
 	function addImage(data){
